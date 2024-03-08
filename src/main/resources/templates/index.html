@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>hello,world</title>
+</head>
+<body>
+<p>this is a hello world</p>
+<form th:action="@{/helloo}" method="post" >
+    <input type="text" placeholder="请输入用户名" name="username"><br>
+    <input type="password" placeholder="请输入密码" name="password" ><br>
+    <input type="submit" value="登录" >
+
+</form>
+<a  href="/user/toLogin">denglu</a>
+<a  href="/user/toRegist">zhuce</a>
+<a  href="/upload/toUploadManage">漫画上传管理</a>
+</body>
+</html>

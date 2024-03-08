@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 注册</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/sign.css" rel="stylesheet">
+    <link href="../css/regist.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="login-logo container">
+        <h1 class="text-center"><b>AYA</b>Comic</h1>
+    </div>
+    <div class="container row  center-block">
+      <form class="form-signin" th:action="@{/user/regist}" action="/user/regist" method="post" >
+        <h3 class="form-signin-heading">注册账号</h3>
+        <div class="form-group has-feedback">
+          <label for="inputUsername" class="sr-only control-label">用户名</label>
+          <input type="text" id="inputUsername" name="userName" class="form-control " placeholder="用户名" required="" autofocus="">
+          <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label for="inputPassword" class="sr-only">密码</label>
+          <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required="">
+          <span class="glyphicon glyphicon-lock form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label for="inputRealname" class="sr-only">真实姓名</label>
+          <input type="text" id="inputRealname" name="realName" class="form-control" placeholder="真实姓名" required="">
+          <span class="glyphicon glyphicon-edit form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label for="inputIdCard" class="sr-only">身份证号</label>
+          <input type="text" id="inputIdCard" name="idCard" class="form-control" placeholder="身份证" required="">
+          <span class="glyphicon glyphicon-tag form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label for="inputEmail" class="sr-only">邮箱</label>
+          <input type="email" id="inputEmail" name="email" class="form-control" placeholder="邮箱" required="">
+          <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="form-group has-feedback">
+          <label for="inputPhone" class="sr-only">手机号</label>
+          <input type="tel" id="inputPhone" name="phone" class="form-control" placeholder="手机号" required="">
+          <span class="glyphicon glyphicon-phone form-control-feedback" aria-hidden="true" ></span>
+        </div>
+        <div class="alert alert-danger" role="alert" th:if = "${errorMsg != null}"  th:text="${errorMsg}"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button><br>
+        <a th:href="@{/user/toLogin}">已有账户，点击登录</a>
+      </form>
+    </div>
+
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

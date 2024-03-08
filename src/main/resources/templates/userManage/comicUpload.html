@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 主页</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="../themes/explorer-fas/theme.css" media="all" rel="stylesheet" type="text/css"/>
+    
+    <style>
+        body{
+            padding-top:50px;
+        }
+        .pill{
+            background-color: #f5f5f5;
+            height:2280px;
+            position: fixed;
+            
+        }
+        .pill ul{
+            margin-top: 10px;
+            
+        }
+        
+        .page-header{
+            margin-top: 20px;
+        }
+        .comic-num{
+            border-radius: 20px;
+            padding: 0 15px;
+            line-height: 30px;
+            height: 30px;
+            width: 144px;
+            border: 1px solid #ccd0d7;
+            box-sizing: border-box;
+            padding: 12px;
+            transition: color .2s ease,background-color .2s ease,border-color .2s ease;
+            outline: none;
+        }
+        .tip{
+            color: #99a2aa;
+            line-height: 30px;
+            margin-left: 6px;
+            font-size: 4px;
+        }
+        .comic-num-list-wrap .comic-num-list .comic-num-item {
+            color: #fff;
+            background: #37c8f7;
+            border: none;
+            border-radius: 16px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 15px;
+            margin-right: 12px;
+            position: relative;
+        }
+        .comic-num-list-wrap .comic-num-list .comic-num-item:hover {
+            
+            background-color: #57dfff;
+            transition-duration: .2s;
+        }
+        .comic-num-list-wrap .comic-num-list li {
+            display: inline-block;
+            margin-top: 12px;
+        }
+        .to-up{
+            margin-top: 12px;
+            width: 70%;
+            height: 50px;
+            margin-left: 15%;
+        }
+        .mynavbar{
+            margin-left: 20px;
+            margin-right: 30px;
+            padding-right: 50px;
+            width: 100%;
+        }
+
+        
+
+    </style>
+    
+  </head>
+  <body>
+      <!-- -->
+    <script src="../js/head.js"></script>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 pill">
+                <a type="button" class="btn btn-info btn-lg to-up" href="toUploadImgFile">投稿</a>
+                <ul class="nav nav-pills nav-stacked nav-pills-stacked-example" >
+                    <li role="presentation" ><a href="toComicCollect">我的收藏</a></li>
+                    <li role="presentation"><a href="toComicHistory">历史记录</a></li>
+                    <li role="presentation"><a href="toUserInfo">个人信息</a></li>
+                    <li role="presentation" ><a href="toUploadManage">我的投稿</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">上传漫画</h1>
+            <div>
+                <div class="comic-num-list-wrap">
+                    <ul class="comic-num-list">
+                        <li class="comic-num-item" modalid="upload-0" id="upload-0" th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="${comicDetail.name}" th:attr="detailId=${comicDetail.id},modalid='upload-'+${iterStat.index},id='upload-'+${iterStat.index},uped_urls=${comicDetail.urls},createTime=${comicDetail.createTime}">hello world</li>
+                        <li class="add-item">
+                            <input type="text" maxlength="20" class="comic-num" placeholder="第一话 hello,world">
+                            <span class="tip">按回车Enter创建话数</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;">开始阅读</button>
+                -->
+            </div>
+            <h1 class="page-header">基础信息</h1>
+            <div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputTitle" class="col-sm-2 control-label">标题</label>
+                      <div class="col-sm-10">
+                          <input name="id" th:value="${comic.id}" style="display: none;">
+                        <input type="text " class="form-control" id="inputTitle" name="title" placeholder="标题" th:value="${comic.title}">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAuthor" class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputAuthor" name="author" placeholder="作者" th:value="${comic.author}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPublish" class="col-sm-2 control-label">出版社</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputPublish" name="publishingHouse" placeholder="出版社或者汉化组"  th:value="${comic.publishingHouse}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputClass" class="col-sm-2 control-label">类别</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="inputClass" name="classfiy" >
+                            <option th:each="classfiy:${classfiyList}" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}" th:field="${comic.classfiy}"></option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress" class="col-sm-2 control-label">地区</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="inputAddress" name="address" >
+                              <option th:each="address:${addressList}" th:text="${address.addressName}" th:value="${address.id}" th:field="${comic.address}"></option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputComplete" class="col-sm-2 control-label">进度</label>
+                        <div class="col-sm-10">
+                          <select class="form-control" id="inputComplete" name="progress" >
+                              <option th:each="progress:${progressesList}" th:text="${progress.progressName}" th:value="${progress.id}" th:field="${comic.progress}"></option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDesc" class="col-sm-2 control-label">简介</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="inputDesc" name="description" rows="3" th:text="${comic.description}"></textarea>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-info btn-lg text-right" onclick="save();" >保存</button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+
+        
+        
+    </div>
+    <div id="upload-list" class="upload-list">
+        <div class="modal fade upload-damo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <form enctype="multipart/form-data">
+                    <div class="file-loading">
+                        <input id="uploadImg" type="file" multiple>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+
+      <!-- FOOTER 
+      <div class="container" style="margin-top: 100px;">
+        <footer>
+            <p class="pull-right"><a href="#">回到顶部</a></p>
+            <p><strong>Copyright © 2020 Akatsuki_Aya</strong></p>
+        </footer>   
+      </div>-->
+      
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../js/plugins/piexif.js" type="text/javascript"></script>
+    <script src="../js/plugins/sortable.js" type="text/javascript"></script>
+    <script src="../js/fileinput.js" type="text/javascript"></script>
+    <script src="../js/locales/zh.js" type="text/javascript"></script>
+    <script src="../themes/fas/theme.js" type="text/javascript"></script>
+    <script src="../themes/explorer-fas/theme.js" type="text/javascript"></script>
+    <script>
+    var i =0;
+    init();
+    //初始化 mouse按钮
+    addMouseEvent();
+    function init(){
+        var length = $(".comic-num-list").children().length-1;
+        for(i ; i<length;i++){
+            var upload= $(".upload-damo").clone();
+            upload.attr("class","modal fade upload-"+i.toString());
+            var uploadImg= upload.find("input");
+            var uploadImgIdName="upload-Img-"+i.toString();
+            uploadImg.attr("id",uploadImgIdName);
+            $(".upload-list").append(upload);
+            var urls = $("#upload-"+i.toString()).attr("uped_urls");
+            urls=JSON.parse(urls)
+            initFileInput(uploadImgIdName,urls);
+        }
+
+    }
+    $(".comic-num").bind('keypress',function(event){
+        if(event.keyCode == 13)
+        {
+            var text = $(".comic-num").val();
+            text =$.trim(text);
+            if( text==""){
+                return;
+            }
+            var addItem = $(".add-item");
+            var newItem= $("<li></li>").text( text);
+            $(".comic-num").val("");
+
+            newItem.addClass("comic-num-item ");
+            newItem.attr("modalId","upload-"+i.toString());
+            newItem.attr("id","upload-"+i.toString());
+            addItem.before(newItem);
+
+            var upload= $(".upload-damo").clone();
+            upload.attr("class","modal fade upload-"+i.toString());
+            var uploadImg= upload.find("input");
+            var uploadImgIdName="upload-Img-"+i.toString();
+            uploadImg.attr("id",uploadImgIdName);
+            $(".upload-list").append(upload);
+            initFileInput(uploadImgIdName);
+            addMouseEvent();
+            i++;
+        }
+    });
+    
+
+
+    function addMouseEvent(){
+        $(".comic-num-item").off('mouseenter');
+        $(".comic-num-item").off('mouseleave');
+        $(".comic-num-item").mouseenter(function(e){
+            var oldText = $(this).text()+" ";
+            $(this).text("");
+            var oldItem= $("<span></span>").text(oldText);
+            oldItem.addClass("Item-move-on");
+            oldItem.attr("data-toggle","modal");
+            var target =$(this).attr("modalId");
+            oldItem.attr("data-target","."+target);
+            var newItem= $("<span></span>");
+            newItem.addClass("glyphicon glyphicon-remove");
+            newItem.attr("aria-hidden","true");
+            newItem.click(function(e){
+                var modalId = $(this).parent().attr("modalId");
+                var detailid = $(this).parent().attr("detailid");
+                if (detailid != null){
+                    deteleComicDetail(detailid);
+                }
+                $("."+modalId).remove();
+                $(this).parent().remove();
+            });
+            $(this).append(oldItem,newItem);
+        });
+        $(".comic-num-item").mouseleave(function(e){
+            var oldText = $(".Item-move-on").text();
+            //alert(oldText);
+            oldText = $.trim(oldText);
+            $(this).text(oldText);
+        });
+
+
+    }
+
+        //初始化fileinput
+    //initFileInput(name);
+    function initFileInput(name,urls) {
+        var id= name.substring(11);
+        var id="upload-"+id;
+        $("#"+name).fileinput({
+            theme: 'fas',
+            language: 'zh', //设置语言
+            dropZoneTitle: '可以将图片拖放到这里 …支持多文件上传',
+            uploadUrl: "upFile", //上传的地址
+            allowedFileExtensions: ['jpg','png'],//接收的文件后缀
+            uploadAsync: false, //默认异步上传
+            showUpload: true, //是否显示上传按钮
+            showRemove: true, //显示移除按钮
+            showPreview: true, //是否显示预览
+            showCancel:true,   //是否显示文件上传取消按钮。默认为true。只有在AJAX上传过程中，才会启用和显示
+            showCaption: true,//是否显示文件标题，默认为true
+            browseClass: "btn btn-primary", //文件选择器/浏览按钮的CSS类。默认为btn btn-primary
+            dropZoneEnabled: true,//是否显示拖拽区域
+            /*minImageWidth: 50, //图片的最小宽度
+            minImageHeight: 50,//图片的最小高度
+            maxImageWidth: 1000,//图片的最大宽度
+            maxImageHeight: 1000,//图片的最大高度
+            maxFileSize: 1024,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 1, //每次上传允许的最少文件数。如果设置为0，则表示文件数是可选的。默认为0
+            maxFileCount: 0, //每次上传允许的最大文件数。如果设置为0，则表示允许的文件数是无限制的。默认为0*/
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            initialPreviewAsData: true,
+            initialPreview: urls,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",//当检测到用于预览的不可读文件类型时，将在每个预览文件缩略图中显示的图标。默认为<i class="glyphicon glyphicon-file"></i>
+            layoutTemplates:{
+                actionUpload:'',//去除上传预览缩略图中的上传图片
+                actionZoom:'',   //去除上传预览缩略图中的查看详情预览的缩略图标
+                actionDownload:'', //去除上传预览缩略图中的下载图标
+                //actionDelete:'', //去除上传预览的缩略图中的删除图标
+            },//对象用于渲染布局的每个部分的模板配置。您可以设置以下模板来控制窗口小部件布局.eg:去除上传图标
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",//字符串，当文件数超过设置的最大计数时显示的消息 maxFileCount。默认为：选择上传的文件数（{n}）超出了允许的最大限制{m}。请重试您的上传！
+        }).on('fileuploaded', function(event, data, previewId, index) {     //异步上传完成
+            //alert(data.response.fileUrl);
+            mydata = data;
+        }).on('filebatchuploadsuccess',function (event,data,files,extra) {      //同步上传完成
+            //alert(data.response.prototype);
+            console.log(id);
+            var myLi = $("#"+id);
+            //alert(data.response.fileUrls);
+            myLi.attr("uped_urls",data.response.fileUrls);
+            mydata = $("#"+id);
+        });
+    }
+
+
+    function  save() {
+        var data = $("form").serialize();
+        var liList = $(".comic-num-list").children();
+        var comicList =[];
+        for(var i=0; i<liList.length-1; i++){
+            var text = $(liList[i]).text();
+            var urls = $(liList[i]).attr("uped_urls");
+            var id = $(liList[i]).attr("detailid");
+            if(urls!=null && urls !=""){
+                var list ={name:text,urls:urls,id:id};
+                comicList.push(list);
+            }
+        }
+        var comicJson = JSON.stringify(comicList);
+        data=data+"&comicJson="+comicJson;
+        $.ajax({
+            type:"POST",
+            url:"addComic",
+            // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+            data:data,
+            async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+            dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+            success:function(data){
+                alert("上传成功");
+                window.location.href="/upload/toUploadManage";
+            },
+            error:function() {
+                alert("error");
+            }
+        });
+
+    }
+    function deteleComicDetail(comicDetailId) {
+        if (comicDetailId == null){
+            return;
+        }
+        $.ajax({
+            type:"POST",
+            url:"deleteComicDetail",
+            // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+            data:{comicDetailId:comicDetailId},
+            async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+            dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+            success:function(data){
+                //alert("上传成功");
+            },
+            error:function() {
+                alert("error");
+            }
+        });
+    }
+    
+    </script>
+  </body>
+</html>

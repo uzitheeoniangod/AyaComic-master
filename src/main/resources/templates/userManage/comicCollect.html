@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <title>AYAComic | 主页</title>
+
+        <!-- Bootstrap -->
+        <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="../css/b.page.bootstrap3.css" rel="stylesheet">
+    <style>
+        body{
+            padding-top:50px;
+        }
+        .pill{
+            background-color: #f5f5f5;
+            height:2280px;
+            position: fixed;
+            
+        }
+        .pill ul{
+            margin-top: 10px;
+            
+        }
+        
+        .page-header{
+            margin-top: 20px;
+        }
+        .my-up>div{
+            position: relative;
+            width: 196px;
+            height:280px;
+            padding: 0 12px;
+            padding-top: 10px;
+            margin-bottom: 16px;
+            margin-right: 12px;
+            box-sizing: border-box;
+            display: -ms-flexbox;
+            -ms-flex-align: center;
+            align-items: center;
+            overflow: visible;
+        }
+        .my-up{
+          margin-top: 12px;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+        }
+        .to-up{
+            margin-top: 12px;
+            width: 70%;
+            height: 50px;
+            margin-left: 15%;
+        }
+        .mynavbar{
+            margin-left: 20px;
+            margin-right: 30px;
+            padding-right: 50px;
+            width: 100%;
+        }
+
+        
+
+    </style>
+    
+  </head>
+  <body>
+      <!-- -->
+    <script src="../js/head.js"></script>
+    <div class="container-fluid">
+        <div class="row">
+            <div style="display: none;">
+                <div class="tag-options" th:each="classfiy:${classfiyList}">
+                    <a role="button" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}" th:attr="id='classfiyId-'+${classfiy.id}">热血</a>
+                </div>
+                <div class="tag-options" th:each="address:${addressList}">
+                    <a  role="button" th:text="${address.addressName}" th:value="${address.id}" th:attr="id='addressId-'+${address.id}">热血</a>
+                </div>
+                <div class="tag-options" th:each="progresses:${progressesList}">
+                    <a  role="button" th:text="${progresses.progressName}" th:value="${progresses.id}" th:attr="id='progressesId-'+${progresses.id}">热血</a>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-2 pill">
+                <a type="button" class="btn btn-info btn-lg to-up" href="toUploadImgFile">投稿</a>
+                <ul class="nav nav-pills nav-stacked nav-pills-stacked-example" >
+                    <li role="presentation" class="active"><a href="toComicCollect">我的收藏</a></li>
+                    <li role="presentation"><a href="toComicHistory">历史记录</a></li>
+                    <li role="presentation"><a href="toUserInfo">个人信息</a></li>
+                    <li role="presentation" ><a href="toUploadManage">我的投稿</a></li>
+                  </ul>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">我的收藏</h1>
+                <div class="my-up"> 
+                    <div th:each="comic,iterStat : ${comicList}" class="comic-list" >
+                        <div class="thumbnail" th:attr="comicId=${comic.id}">
+                            <a onclick="toComicShow(this)" role="button" th:attr="value=${comic.id}">
+                                <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                            </a>
+                            <h4 onclick="toComicShow(this)" role="button" th:text="${comic.title}" th:attr="title=${comic.title},value=${comic.id}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                                漫画1
+                            </h4>
+                            <p>
+                                <span th:text="${comic.classfiy}" th:attr="value=${comic.classfiy}"></span>
+                                <span th:text="${comic.address}" th:attr="value=${comic.address}"></span>
+                                <span th:text="${comic.progress}" th:attr="value=${comic.progress}"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="paging" style="margin-right: 80px;">
+                    <input type="hidden" id="pageNumber" th:value="${currentPage}">
+                    <input type="hidden" id="pageSize" th:value="${1}">
+                    <input type="hidden" id="totalPage" th:value="${page.totalPages}">
+                    <input type="hidden" id="totalRow" th:value="${page.totalPages}">
+                    <div id="page1"></div>
+                </div>
+
+            </div>   
+
+        </div>
+        
+    </div>
+
+    
+
+
+      <!-- FOOTER 
+      <div class="container" style="margin-top: 100px;">
+        <footer>
+            <p class="pull-right"><a href="#">回到顶部</a></p>
+            <p><strong>Copyright © 2020 Akatsuki_Aya</strong></p>
+        </footer>   
+      </div>-->
+      
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script src="../js/bpage.js"></script>
+    <script>
+        initSelect();
+        var mydata;
+        function initSelect() {
+            var list = $(".comic-list");
+            for(var i =0;i<list.size();i++){
+                var span = $(list[i]).find("span");
+                var cid = $(span[0]).attr("value");
+                var aid = $(span[1]).attr("value");
+                var pid = $(span[2]).attr("value");
+                $(span[0]).text($("#classfiyId-"+cid).text());
+                $(span[1]).text($("#addressId-"+aid).text());
+                $(span[2]).text($("#progressesId-"+pid).text());
+            }
+        }
+        function toUpload(value) {
+            //mydata = value;
+            var comicId= $(value).parent().parent().attr("comicId");
+            window.location.href="toUploadImgFile?comicId="+comicId;
+        }
+        $("#page1").bPage({
+            //页面跳转的目标位置
+            url : 'toComicCollect',
+            //分页数据设置
+            totalPage : $('#totalPage').val(),
+            totalRow : $('#totalRow').val(),
+            pageSize : $('#pageSize').val(),
+            pageNumber : $('#pageNumber').val(),
+            //页面跳转时需要同时传递给服务端的自定义参数设置
+            params : function(){
+                return {
+                    //userName : 'zhangsan',
+                    //age : 42
+                };
+            }
+        });
+        function toComicShow(value){
+            var comicId= $(value).attr("value");
+            window.location.href="http://localhost/comic/toComicShow?comicId="+comicId;
+        }
+    </script>
+  </body>
+</html>

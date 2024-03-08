@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 主页</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../css/carousel.css" rel="stylesheet">
+    <style>
+        body{
+            padding-top:70px;
+        }
+        .comic-head div{
+            display: inline-block;
+        }
+        .paging{
+            text-align: right;
+            margin-right: 100px;
+        }
+        .comic-desc{
+          margin-top: 8px;
+          font-size: 14px;
+          white-space: normal;
+          color: rgba(0,0,0,.56);
+          display: block;
+          height: 96px;
+        }
+        .comic-title{
+          margin: 0 0 11px;
+          font-size: 28px;
+          font-weight: 400;
+          color: rgba(0,0,0,.87);
+        }
+        .comic-from{
+          margin: 0;
+          font-size: 16px;
+          font-weight: 400;
+          color: rgba(0,0,0,.56);
+          white-space: nowrap;
+        }
+        .comic-class{
+          margin-top: 14px;
+          font-size: 14px;
+          line-height: 2;
+          color: rgba(0,0,0,.34);
+        }
+        .comic-button{
+          margin-top: 21px;
+        }
+        .comic-button button{
+          margin-right: 15px;
+        }
+        .comic-list{
+          margin-top: 50px;
+        }
+        .comic-list-button{
+          margin-top: 12px;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+        }
+        .comic-list-button button{
+          position: relative;
+          width: 200px;
+          height: 48px;
+          padding: 0 12px;
+          margin-bottom: 16px;
+          margin-right: 16px;
+          font-size: 14px;
+          line-height: 1.5;
+          color: rgba(0,0,0,.87);
+          text-align: left;
+          border: 1px solid rgba(0,0,0,.12);
+          border-radius: 3px;
+          box-sizing: border-box;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-align: center;
+          align-items: center;
+          overflow: visible;
+          background-color: transparent;
+          
+        }
+        .comic-list-button button:hover{
+          color: #000;
+          background-color: #edfaff;
+        }
+        .mynavbar{
+            margin-left: 20px;
+            margin-right: 30px;
+            padding-right: 50px;
+            width: 100%;
+        }
+        
+
+    </style>
+
+    
+  </head>
+  <body>
+      <!-- -->
+    <script src="../js/head.js"></script>
+    <div class="container">
+        <div class="comic-head row">
+            <div class="comic-thum col-md-3" >
+                <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">   
+            </div>
+            <div class="col-md-9">
+                <!-- <h1 class="comic-title">关于早坂爱是爷老婆，爷要打出来这件事</h1> -->
+                <h1 class="comic-title" th:text="${comic.title}" th:attr="comicId=${comic.id}">漫画标题1</h1>
+                <h3 class="comic-from" th:text="${comic.author}+','+${comic.publishingHouse}">作者，出版社/汉化组</h3>
+                <h5 class="comic-class"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <span th:text="${comic.classfiy}+','+${comic.address}+','+${comic.progress}"></span></h5>
+                <div class="comic-desc" style="display: block">
+                 <p th:text="${comic.description}">【此漫画的翻译由版权方提供】“先告白的人在恋爱当中是输家。”
+                  家庭背景与人品都很棒，一大群有前途的秀才所聚集的秀知院学园。在那里的学生会相遇的副会长·四宫辉夜与会长·白银御行原本应该是彼此受到了对方吸引，但想不到都过半年了却仍然什么事情也没发生。最麻烦的是这两个自尊心超强、无法坦率的家伙，居然开始想着要“设法让对方向自己告白”？
+                  直到恋情明朗之前都会很欢乐的故事，充满新鲜感的“斗智”爱情喜剧，就此开战。
+                 </p>
+                </div>
+                <div class="comic-button">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target=".show-comic" style="width: 200px;" onclick="changeComic(); " th:attr="historyId=${comicHistory.comicDetailId}" id="startComic">开始阅读</button>
+                    <button type="button" class="btn btn-default btn-lg"  onclick="changeCollect();" style="width: 144px;"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="isCollect" th:if="${comicCollect} == null">收藏</span><span th:if="${comicCollect} != null" class="isCollect">已收藏</span></button>
+                </div>
+            </div>
+        </div>
+        <div class="comic-list">
+          <div>
+            <h2>章节列表</h2>
+          </div>
+          <div class="comic-list-button">
+              <button th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="|${comicDetail.name}|" th:attr="urls=${comicDetail.urls}, id='comicDetailId-'+${comicDetail.id}" data-toggle="modal" data-target=".show-comic" onclick="showComic(this)"  >1 重生之奥尔加</button>
+
+          </div>
+        </div>
+        
+    </div>
+
+    
+
+
+      <!-- FOOTER -->
+      <div class="container" style="margin-top: 100px;">
+        <footer>
+            <p class="pull-right"><a href="#">回到顶部</a></p>
+            <p><strong>Copyright © 2020 Akatsuki_Aya</strong></p>
+        </footer>   
+      </div>
+      <div class="modal fade show-comic" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <img data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://qbn5lwo9d.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">   
+            <span id="img_list_end"></span>
+          </div>
+          <div style="display:none">
+             <img id="img_demo" data-src="holder.js/100%x180" alt="100%x180" style="width: 100%; display: inline-block;" src="http://qbn5lwo9d.bkt.clouddn.com/image/test/1gogopher.jpg" data-holder-rendered="true">
+          </div>
+        </div>
+      </div>
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+      <script>
+          function  changeComic() {
+              //id=1;
+              var id = $("#startComic").attr("historyId");
+              id="#comicDetailId-"+id.toString();
+              var list = $(id).attr("urls");
+              list = JSON.parse(list);
+              var imgListEnd = $("#img_list_end");
+              var child= $(".modal-content").children();
+              for(var i =0;i<child.length-1;i++){
+                  child[i].remove();
+              }
+              console.log(list.length);
+              for (var i=0; i < list.length;i++ ){
+                  var url = list[i];
+                  var imgDemo = $("#img_demo").clone();
+                  imgDemo.attr("src",url);
+                  imgListEnd.before(imgDemo);
+              }
+          }
+          var mydata ;
+          function showComic(value) {
+              var id= $(value).attr("id").substr(14);
+              $("#startComic").attr("historyId",id);
+              updateHistory(id);
+              changeComic();
+          }
+          function changeCollect() {
+              var comicId = $(".comic-title").attr("comicId");
+              $.ajax({
+                  type:"POST",
+                  url:"addComicCollect",
+                  // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+                  data:{comicId:comicId},
+                  async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                  dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                  success:function(data){
+                      mydata=data;
+                      $(".isCollect").text(data.isCollect);
+                      //alert("上传成功");
+                  },
+                  error:function() {
+                      alert("error");
+                  }
+              });
+          }
+          function updateHistory(comicDetailid) {
+              var comicId = $(".comic-title").attr("comicId");
+              $.ajax({
+                  type:"POST",
+                  url:"updateHistory",
+                  // data:{"id":val},     // data参数是可选的，有多种写法，也可以直接在url参数拼接参数上去，例如这样：url:"getUser?id="+val,
+                  data:{comicId:comicId,comicDetailId:comicDetailid},
+                  async:true,   // 异步，默认开启，也就是$.ajax后面的代码是不是跟$.ajx里面的代码一起执行
+                  dataType:"json",   // 返回浏览器的数据类型，指定是json格式，前端这里才可以解析json数据
+                  success:function(data){
+                      mydata = data;
+                      //alert("上传成功");
+                  },
+                  error:function() {
+                      alert("error");
+                  }
+              });
+          }
+      </script>
+  </body>
+</html>

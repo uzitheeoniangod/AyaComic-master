@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 主页</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../css/carousel.css" rel="stylesheet">
+    <link href="../css/b.page.bootstrap3.css" rel="stylesheet">
+    <style>
+        .selected{
+            color: #00CCFF !important;
+        }
+        body{
+            padding-top:70px;
+        }
+        .tag{
+            margin-bottom: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .tag-title{
+            margin-right: 14px;
+            color: rgba(0,0,0,.34);
+        }
+        .tag-options{
+            color: rgba(0,0,0,.87);
+            margin: 0 4px;
+        }
+        .tag div{
+            display: inline-block;
+            padding: 0 10px;
+            
+            border-radius: 5px;
+        }
+
+        section{
+            line-height: 2;
+        }
+        a{
+            color: black;
+        }
+        a:link{text-decoration:none; }  /* 指正常的未被访问过的链接*/
+
+        a:visited{text-decoration:none; }/*指已经访问过的链接*/
+
+        a:hover{text-decoration:none;}/*指鼠标在链接*/
+
+        a:active{text-decoration:none;}/* 指正在点的链接*/ 
+        .main-list{
+            margin-top: 50px;
+        }
+        .paging{
+            text-align: right;
+        }
+        .mynavbar{
+            margin-left: 20px;
+            margin-right: 30px;
+            padding-right: 50px;
+            width: 100%;
+        }
+
+
+    </style>
+    
+  </head>
+  <body>
+      <!-- -->
+    <script src="../js/head.js"></script>
+    <div class="container">
+        <section>
+            <div id="selectedClassId" th:value="${classId}"></div>
+            <div id="selectedAddressId"th:value="${addressId}"></div>
+            <div id="selectedProgressId" th:value="${progressId}"></div>
+            <div class="tag">
+                <div class="tag-title">
+                    题材
+                </div>
+                <div class="tag-options" role="button">
+                    <a onclick="toClassfiy(this)" value="0" role="button" id="classfiyId-0"  >全部</a>
+                </div>
+                <div class="tag-options" th:each="classfiy:${classfiyList}">
+                    <a onclick="toClassfiy(this)" role="button" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}" th:attr="id='classfiyId-'+${classfiy.id}">热血</a>
+                </div>
+
+            </div>
+            <div class="tag">
+                <div  class="tag-title">地区</div>
+                <div class="tag-options" role="button">
+                    <a onclick="toClassfiy(this)" value="0" role="button" id="addressId-0" >全部</a>
+                </div>
+                <div class="tag-options" th:each="address:${addressList}">
+                    <a onclick="toClassfiy(this)" role="button" th:text="${address.addressName}" th:value="${address.id}" th:attr="id='addressId-'+${address.id}">热血</a>
+                </div>
+            </div>
+            <div class="tag">
+                <div  class="tag-title">进度</div>
+                <div class="tag-options" role="button">
+                    <a onclick="toClassfiy(this)" value="0" role="button" id="progressesId-0">全部</a>
+                </div>
+                <div class="tag-options" th:each="progresses:${progressesList}">
+                    <a onclick="toClassfiy(this)" role="button" th:text="${progresses.progressName}" th:value="${progresses.id}" th:attr="id='progressesId-'+${progresses.id}">热血</a>
+                </div>
+            </div>
+            
+            
+        </section>
+        <section class="main-list">
+            <div class="row">
+                <div th:each="comic,iterStat : ${comicList}" class="comic-list">
+                    <div class="col-xs-6 col-md-2">
+                      <div class="thumbnail">
+                          <a onclick="toComicShow(this)" role="button" th:attr="value=${comic.id}">
+                            <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                          </a>
+                          <h4 onclick="toComicShow(this)" role="button" th:text="${comic.title}" th:attr="title=${comic.title},value=${comic.id}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                              漫画1
+                          </h4>
+                          <p>
+                              <span th:text="${comic.classfiy}" th:attr="value=${comic.classfiy}"></span>
+                              <span th:text="${comic.address}" th:attr="value=${comic.address}"></span>
+                              <span th:text="${comic.progress}" th:attr="value=${comic.progress}"></span>
+                          </p>
+                      </div>
+                    </div>
+                </div>  
+            </div>
+        </section>
+        <div >
+            <div class="paging" style="margin-right: 80px;">
+                <input type="hidden" id="pageNumber" th:value="${currentPage}">
+                <input type="hidden" id="pageSize" th:value="${1}">
+                <input type="hidden" id="totalPage" th:value="${page.totalPages}">
+                <input type="hidden" id="totalRow" th:value="${page.totalPages}">
+                <div id="page1"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+      <!-- FOOTER -->
+      <div class="container">
+        <footer>
+            <p class="pull-right"><a href="#">回到顶部</a></p>
+            <p><strong>Copyright © 2020 Akatsuki_Aya</strong></p>
+        </footer>   
+      </div>
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script src="../js/bpage.js"></script>
+    <script>
+        initSelect();
+        var mydata;
+        function initSelect() {
+            var classId=$("#selectedClassId").attr("value");
+            var addressId=$("#selectedAddressId").attr("value");
+            var progressId=$("#selectedProgressId").attr("value");
+            $("#classfiyId-"+classId).attr("class","selected");
+            $("#addressId-"+addressId).attr("class","selected");
+            $("#progressesId-"+progressId).attr("class","selected");
+            var list = $(".comic-list");
+            for(var i =0;i<list.size();i++){
+                var span = $(list[i]).find("span");
+                var cid = $(span[0]).attr("value");
+                var aid = $(span[1]).attr("value");
+                var pid = $(span[2]).attr("value");
+                $(span[0]).text($("#classfiyId-"+cid).text());
+                $(span[1]).text($("#addressId-"+aid).text());
+                $(span[2]).text($("#progressesId-"+pid).text());
+            }
+        }
+        function toClassfiy(value){
+            mydata = value;
+            var classId=$("#selectedClassId").attr("value");
+            var addressId=$("#selectedAddressId").attr("value");
+            var progressId=$("#selectedProgressId").attr("value");
+            var id =$(value).attr("id");
+            if(id.indexOf("class")!= -1){
+                classId=$("#"+id).attr("value");
+            }else if(id.indexOf("address")!= -1){
+                addressId=$("#"+id).attr("value");
+            }else if(id.indexOf("progress")!= -1){
+                progressId=$("#"+id).attr("value");
+            }
+            //console.log("classify?classfiyId=" + classId + "&addressId=" + addressId + "&progressId" + progressId);
+            window.location.href = "toClassfiy?classfiyId=" + classId + "&addressId=" + addressId + "&progressId=" + progressId;
+        }
+        function toComicShow(value){
+            var comicId= $(value).attr("value");
+            window.location.href="toComicShow?comicId="+comicId;
+        }
+        $("#page1").bPage({
+            //页面跳转的目标位置
+            url : 'toClassfiy',
+            //分页数据设置
+            totalPage : $('#totalPage').val(),
+            totalRow : $('#totalRow').val(),
+            pageSize : $('#pageSize').val(),
+            pageNumber : $('#pageNumber').val(),
+            //页面跳转时需要同时传递给服务端的自定义参数设置
+            params : function(){
+                return {
+                    classfiyId:$("#selectedClassId").attr("value"),
+                    addressId:$("#selectedAddressId").attr("value"),
+                    progressId:$("#selectedProgressId").attr("value")
+                    //userName : 'zhangsan',
+                    //age : 42
+                };
+            }
+        });
+    </script>
+  </body>
+</html>

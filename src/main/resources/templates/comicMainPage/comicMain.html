@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>AYAComic | 主页</title>
+
+    <!-- Bootstrap -->
+    <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/carousel.css" rel="stylesheet">
+
+    <style>
+      body{
+        padding-top:50px;
+      }
+      .mynavbar{
+        margin-left: 20px;
+        margin-right: 30px;
+        padding-right: 50px;
+        width: 100%;
+      }
+    </style>
+    
+  </head>
+  <body>
+  <script src="../js/head.js"></script>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item">
+        <img class="first-slide" onclick="toComicShow(this)" th:attr="value=${carouselComicList[0].id}" src="http://qbn5lwo9d.bkt.clouddn.com/Fsanm4sRPcWSjp4WA_9tdF4N67pW?imageView2/0/q/100" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption" >
+              <p th:text ="${carouselComicList[0].title}">漫画1</p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" onclick="toComicShow(this)" th:attr="value=${carouselComicList[1].id}" src="http://qbn5lwo9d.bkt.clouddn.com/Fsanm4sRPcWSjp4WA_9tdF4N67pW?imageView2/0/q/100" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p th:text ="${carouselComicList[1].title}">漫画2</p>
+            </div>
+          </div>
+        </div>
+        <div class="item active">
+          <img class="third-slide" onclick="toComicShow(this)" th:attr="value=${carouselComicList[2].id}" src="http://qbn5lwo9d.bkt.clouddn.com/Fsanm4sRPcWSjp4WA_9tdF4N67pW?imageView2/0/q/100" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <p th:text ="${carouselComicList[2].title}">漫画3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <div class="container marketing">
+      <div style="display: none;">
+        <div class="tag-options" th:each="classfiy:${classfiyList}">
+          <a role="button" th:text="${classfiy.classfiyName}" th:value="${classfiy.id}" th:attr="id='classfiyId-'+${classfiy.id}">热血</a>
+        </div>
+        <div class="tag-options" th:each="address:${addressList}">
+          <a  role="button" th:text="${address.addressName}" th:value="${address.id}" th:attr="id='addressId-'+${address.id}">热血</a>
+        </div>
+        <div class="tag-options" th:each="progresses:${progressesList}">
+          <a  role="button" th:text="${progresses.progressName}" th:value="${progresses.id}" th:attr="id='progressesId-'+${progresses.id}">热血</a>
+        </div>
+      </div>
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-md-8">
+          <div>
+            <h1>漫画推荐</h1>
+          </div>
+          <div class="row">
+            <div>
+              <div class="col-xs-6 col-md-3 comic-list" th:each="comic,iterStat : ${comicList}">
+                <div class="thumbnail">
+                  <a onclick="toComicShow(this)" role="button" th:attr="value=${comic.id}">
+                    <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                  </a>
+                  <h4 onclick="toComicShow(this)" role="button" th:text="${comic.title}" th:attr="title=${comic.title},value=${comic.id}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap">
+                    漫画1
+                  </h4>
+                  <p>
+                    <span th:text="${comic.classfiy}" th:attr="value=${comic.classfiy}"></span>
+                    <span th:text="${comic.address}" th:attr="value=${comic.address}"></span>
+                    <span th:text="${comic.progress}" th:attr="value=${comic.progress}"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                    <a href="#">
+                      <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                    </a>
+                    <h4>
+                        漫画1
+                    </h4>
+                    <p>漫画类型 漫画类型</p>
+                </div>
+                
+                
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                  <a href="#">
+                    <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                  </a>
+                  <h4>
+                      漫画1
+                  </h4>
+                  <p>漫画类型 漫画类型</p>
+              </div>
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                  <a href="#">
+                    <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                  </a>
+                  <h4>
+                      漫画1
+                  </h4>
+                  <p>漫画类型 漫画类型</p>
+              </div>
+              </div>
+              <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                  <a href="#">
+                    <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcxIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MSAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MTgwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTcxYzQ3OWVjNzEgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNzFjNDc5ZWM3MSI+PHJlY3Qgd2lkdGg9IjE3MSIgaGVpZ2h0PSIxODAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI1OS41NDY4NzUiIHk9Ijk0LjUiPjE3MXgxODA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-holder-rendered="true">
+                  </a>
+                  <h4>
+                      漫画1
+                  </h4>
+                  <p>漫画类型 漫画类型</p>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div>
+              <h1>
+                排行榜
+              </h1>
+            </div>
+            <div id="rank">
+              <a th:each="rankComic,iterStat : ${rankComicList}" onclick="toComicShow(this)" role="button" th:attr="value=${rankComic.id},title=${rankComic.title}"  style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                <h3 ><span class="badge" th:text="${iterStat.count}">1 </span> <span th:text="${rankComic.title}"></span></h3>
+              </a>
+
+              
+              
+            </div>
+        </div>
+      </div><!-- /.row -->
+
+
+
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p><strong>Copyright © 2020 Akatsuki_Aya</strong></p>
+    </footer>
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="../bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-3.3.7/js/carousel.js"></script>
+    <script>
+      initSelect();
+      var mydata;
+      function initSelect() {
+        var list = $(".comic-list");
+        for(var i =0;i<list.size();i++){
+          var span = $(list[i]).find("span");
+          var cid = $(span[0]).attr("value");
+          var aid = $(span[1]).attr("value");
+          var pid = $(span[2]).attr("value");
+          $(span[0]).text($("#classfiyId-"+cid).text());
+          $(span[1]).text($("#addressId-"+aid).text());
+          $(span[2]).text($("#progressesId-"+pid).text());
+        }
+      }
+      function toComicShow(value){
+        var comicId= $(value).attr("value");
+        window.location.href="toComicShow?comicId="+comicId;
+      }
+    </script>
+  </body>
+</html>

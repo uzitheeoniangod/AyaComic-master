@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title th:text = "'This is '+ ${user.userName}+ '\'s page'">Title</title>
+</head>
+<body>
+    <p th:text="${user.userName}">test</p>
+    <a th:href="@{https://www.baidu.com/}">百度</a>
+    <p th:if = "${user.passWord}== 123">true</p>
+
+
+</body>
+</html>
