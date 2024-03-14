@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>AYAComic | 主页</title>
+    <title>TYKComic | 主页</title>
 
     <!-- Bootstrap -->
     <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -107,6 +107,10 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">上传漫画</h1>
+            <form enctype="multipart/form-data" method="post" action="/fileUpload" id="upload_form">
+                <input id="file_upload" type="file" name="fileImg" onchange="displayImage()"/>
+                <input type="button" value="上传图片" onclick="manualSubmit()"/>
+            </form>
             <div>
                 <div class="comic-num-list-wrap">
                     <ul class="comic-num-list">
@@ -176,6 +180,7 @@
                     <div style="text-align: right;">
                         <button type="button" class="btn btn-info btn-lg text-right" onclick="save();" >保存</button>
                     </div>
+
                     
                 </form>
             </div>
@@ -415,6 +420,26 @@
             }
         });
     }
+    function displayImage() {
+        // 获取点击的文本框
+        let file = document.getElementById("file_upload");
+        let imgUrl = window.URL.createObjectURL(file.files[0]);
+        let img = document.getElementById('uploaded_images');
+        img.setAttribute('src', imgUrl); // 修改img标签src属性值
+    }
+
+    function manualSubmit(){
+
+        let form = document.getElementById("upload_form");
+
+        //判断是否已选文件,要么提交,要么提示选择文件
+        if (document.getElementById("uploaded_images").getAttribute("src").length > 0) {
+            form.submit();
+        }else {
+            alert("请先选择上传的文件!");
+        }
+    }
+
     
     </script>
   </body>

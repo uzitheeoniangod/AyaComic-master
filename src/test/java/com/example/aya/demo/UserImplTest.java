@@ -61,7 +61,7 @@ public class UserImplTest {
 
     @Test
     public void GenderTest() {
-        User user = new User("aya", "111111", "jxw", "310105192401151248", "18930378979", "xiaowen@qq.com", 0);
+        User user = new User("tyk", "111111", "jxw", "310105192401151248", "18930378979", "xiaowen@qq.com", 0);
         System.out.println(user);
     }
 }

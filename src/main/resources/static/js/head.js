@@ -7,7 +7,7 @@ document.writeln("            <span class=\'icon-bar\'></span>");
 document.writeln("            <span class=\'icon-bar\'></span>");
 document.writeln("            <span class=\'icon-bar\'></span>");
 document.writeln("          </button>");
-document.writeln("          <a class=\'navbar-brand\' href=\'#\'>AYAComic</a>");
+document.writeln("          <a class=\'navbar-brand\' href=\'#\'>TKZComic</a>");
 document.writeln("        </div>");
 document.writeln("        <div id=\'navbar\' class=\'navbar-collapse collapse\'>");
 document.writeln("          <ul class=\'nav navbar-nav\'>");

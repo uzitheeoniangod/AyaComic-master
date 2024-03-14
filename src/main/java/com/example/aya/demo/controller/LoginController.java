@@ -50,6 +50,9 @@ public class LoginController {
         Object errorMsg = model.getAttribute("errorMsg");
         if (errorMsg != null) {
             return "/userPage/regist";
+        } else if (userName=="admin") {
+            return "/managePage/";
+
         }
         return "index2";
     }
