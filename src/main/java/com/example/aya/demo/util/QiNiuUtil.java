@@ -5,20 +5,25 @@ import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
+import com.qiniu.storage.DownloadUrl;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import com.example.aya.demo.dao.Comic;
 import com.qiniu.util.StringMap;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import static com.example.aya.demo.common.GlobalConstants.useHttps;
 
 
 public class QiNiuUtil {
 
 
     public static String  upload(byte[] flieBytes) {
-        Configuration cfg = new Configuration(Region.region2());
+        Configuration cfg = new Configuration(Region.region0());
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传
@@ -52,5 +57,6 @@ public class QiNiuUtil {
         }
         return fileUrl.toString();
     }
+
 
 }

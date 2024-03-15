@@ -4,3 +4,9 @@ server:
 spring:
   resources:
     static-locations: classpath:/templates/,classpath:/userPage,classpath:/userManage,classpath:/comicMainPage,classpath:static/
+
+oss:
+  qiniu:
+    url:http:
+    accessKey: 0dUTPxirEJTBPgPz5ImTi-Cno3fpvpaAN2oaNbLv
+    secretKey: noPNLTLed1phRliwQdj5YhzJz68q1NW0YUUnKJJe

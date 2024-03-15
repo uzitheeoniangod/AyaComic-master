@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>TYKComic | 主页</title>
+    <title>TKZComic | 主页</title>
 
     <!-- Bootstrap -->
     <link href="../bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -107,16 +107,19 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">上传漫画</h1>
-            <form enctype="multipart/form-data" method="post" action="/fileUpload" id="upload_form">
-                <input id="file_upload" type="file" name="fileImg" onchange="displayImage()"/>
-                <input type="button" value="上传图片" onclick="manualSubmit()"/>
-            </form>
+<!--           <form enctype="multipart/form-data" method="post" action="/fileUpload" id="upload_form">-->
+<!--                <input id="file_upload" type="file" name="fileImg" onchange="displayImage()"/>-->
+<!--                <input type="button" value="上传图片" onclick="manualSubmit()"/>-->
+<!--            </form>-->
+<!--            <div style="text-align:left;">-->
+<!--                <button type="button" class="btn btn-info btn-lg text-right" onclick="window.location.href='../upload-image.html'" >上传</button>-->
+<!--            </div>-->
             <div>
                 <div class="comic-num-list-wrap">
                     <ul class="comic-num-list">
                         <li class="comic-num-item" modalid="upload-0" id="upload-0" th:each="comicDetail,iterStat : ${comic.comicDetailList}" th:text="${comicDetail.name}" th:attr="detailId=${comicDetail.id},modalid='upload-'+${iterStat.index},id='upload-'+${iterStat.index},uped_urls=${comicDetail.urls},createTime=${comicDetail.createTime}">hello world</li>
                         <li class="add-item">
-                            <input type="text" maxlength="20" class="comic-num" placeholder="第一话 hello,world">
+                            <input type="text" maxlength="20" class="comic-num" placeholder="分集">
                             <span class="tip">按回车Enter创建话数</span>
                         </li>
                     </ul>
@@ -236,6 +239,10 @@
     init();
     //初始化 mouse按钮
     addMouseEvent();
+     function upload(){
+
+
+     }
     function init(){
         var length = $(".comic-num-list").children().length-1;
         for(i ; i<length;i++){
